@@ -416,6 +416,26 @@ namespace mRemoteNG.App
         public const int WM_WINDOWPOSCHANGED = 0x47;
 
         /// <summary>
+        /// Posted when the user double-clicks the left mouse button while the cursor is within the nonclient area of a window. 
+        /// </summary>
+        public const int WM_NCLBUTTONDBLCLK = 0xA3;
+
+        /// <summary>
+        /// Posted when the user presses the right mouse button while the cursor is within the nonclient area of a window.   
+        /// </summary>
+        public const int WM_NCRBUTTONDOWN = 0xA4;
+
+        /// <summary>
+        /// Posted when the user releases the right mouse button while the cursor is within the nonclient area of a window.  
+        /// </summary>
+        public const int WM_NCRBUTTONUP = 0xA5;
+
+        /// <summary>
+        /// Posted when the user double-clicks the right mouse button while the cursor is within the nonclient area of a window.  
+        /// </summary>
+        public const int WM_NCRBUTTONDBLCLK = 0xA6;
+
+        /// <summary>
         /// Posted to the window with the keyboard focus when a nonsystem key is pressed. A nonsystem key is a key that is pressed when the ALT key is not pressed.
         /// </summary>
         public const int WM_KEYDOWN = 0x100;

@@ -53,6 +53,7 @@ namespace mRemoteNG.UI.Forms
         private string _connectionsFileName;
         private bool _showFullPathInTitle;
         private readonly AdvancedWindowMenu _advancedWindowMenu;
+        private readonly ContextMenuStripTitleBar _contextMenuStripTitleBar;
         private ConnectionInfo _selectedConnection;
         private readonly IList<IMessageWriter> _messageWriters = [];
         private readonly ThemeManager _themeManager;
@@ -85,6 +86,7 @@ namespace mRemoteNG.UI.Forms
             ApplyTheme();
 
             _advancedWindowMenu = new AdvancedWindowMenu(this);
+            _contextMenuStripTitleBar = new ContextMenuStripTitleBar();
         }
 
         #region Properties
@@ -222,7 +224,9 @@ namespace mRemoteNG.UI.Forms
             }
 
             OptionsForm = new FrmOptions();
-            
+
+            ShowHideMenu();
+
             if (!Properties.OptionsTabsPanelsPage.Default.CreateEmptyPanelOnStartUp) return;
             string panelName = !string.IsNullOrEmpty(Properties.OptionsTabsPanelsPage.Default.StartUpPanelName) ? Properties.OptionsTabsPanelsPage.Default.StartUpPanelName : Language.NewPanel;
 
@@ -597,6 +601,12 @@ namespace mRemoteNG.UI.Forms
                             NativeMethods.SendMessage(_fpChainedWindowHandle, m.Msg, m.LParam, m.WParam);
                         }
                         break;
+                    case NativeMethods.WM_NCRBUTTONDOWN:
+                        int lParamInt = m.LParam.ToInt32();
+                        int x = lParamInt & 0xFFFF;
+                        int y = (lParamInt >> 16) & 0xFFFF;
+                        _contextMenuStripTitleBar.Show(x, y);
+                        return;
                 }
             }
             catch (Exception ex)
