@@ -352,7 +352,6 @@ namespace mRemoteNG.UI.Forms
         {
             if (!CommonRegistrySettings.AllowCheckForUpdates) return;
             if (!CommonRegistrySettings.AllowCheckForUpdatesAutomatical) return;
-            if (!CommonRegistrySettings.AllowPromptForUpdatesPreference) return;
 
             if (Properties.OptionsUpdatesPage.Default.CheckForUpdatesAsked) return;
             string[] commandButtons =
@@ -383,8 +382,7 @@ namespace mRemoteNG.UI.Forms
             if (!Properties.OptionsUpdatesPage.Default.CheckForUpdatesOnStartup) return;
             if (Properties.OptionsUpdatesPage.Default.CheckForUpdatesFrequencyDays == 0) return;
 
-            DateTime nextUpdateCheck =
-                Convert.ToDateTime(Properties.OptionsUpdatesPage.Default.CheckForUpdatesLastCheck.Add(TimeSpan.FromDays(Convert.ToDouble(Properties.OptionsUpdatesPage.Default.CheckForUpdatesFrequencyDays))));
+            DateTime nextUpdateCheck = Convert.ToDateTime(Properties.OptionsUpdatesPage.Default.CheckForUpdatesLastCheck.Add(TimeSpan.FromDays(Convert.ToDouble(Properties.OptionsUpdatesPage.Default.CheckForUpdatesFrequencyDays))));
 
             if (!Properties.OptionsUpdatesPage.Default.UpdatePending && DateTime.UtcNow <= nextUpdateCheck) return;
             if (!IsHandleCreated)
